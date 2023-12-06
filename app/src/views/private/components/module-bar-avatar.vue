@@ -55,40 +55,38 @@ const userFullName = userStore.fullName ?? undefined;
 			</v-button>
 		</v-badge>
 
-		<v-hover v-slot="{ hover }">
-			<v-dialog v-model="signOutActive" @esc="signOutActive = false">
-				<template #activator="{ on }">
-					<transition name="sign-out">
-						<v-button v-if="hover" v-tooltip.right="t('sign_out')" tile icon x-large class="sign-out" @click="on">
-							<v-icon name="logout" />
-						</v-button>
-					</transition>
-				</template>
+		<v-dialog v-model="signOutActive" @esc="signOutActive = false">
+			<template #activator="{ on }">
+				<transition name="sign-out">
+					<v-button v-tooltip.right="t('sign_out')" tile icon x-large class="sign-out" @click="on">
+						<v-icon name="logout" />
+					</v-button>
+				</transition>
+			</template>
 
-				<v-card>
-					<v-card-title>{{ t('sign_out_confirm') }}</v-card-title>
-					<v-card-actions>
-						<v-button secondary @click="signOutActive = !signOutActive">
-							{{ t('cancel') }}
-						</v-button>
-						<v-button :to="signOutLink">{{ t('sign_out') }}</v-button>
-					</v-card-actions>
-				</v-card>
-			</v-dialog>
+			<v-card>
+				<v-card-title>{{ t('sign_out_confirm') }}</v-card-title>
+				<v-card-actions>
+					<v-button secondary @click="signOutActive = !signOutActive">
+						{{ t('cancel') }}
+					</v-button>
+					<v-button :to="signOutLink">{{ t('sign_out') }}</v-button>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 
-			<router-link :to="userProfileLink">
-				<v-avatar v-tooltip.right="userFullName" tile large :class="{ 'no-avatar': !avatarURL }">
-					<img
-						v-if="avatarURL && !avatarError"
-						:src="avatarURL"
-						:alt="userFullName"
-						class="avatar-image"
-						@error="avatarError = $event"
-					/>
-					<v-icon v-else name="account_circle" />
-				</v-avatar>
-			</router-link>
-		</v-hover>
+		<router-link :to="userProfileLink">
+			<v-avatar v-tooltip.right="userFullName" tile large :class="{ 'no-avatar': !avatarURL }">
+				<img
+					v-if="avatarURL && !avatarError"
+					:src="avatarURL"
+					:alt="userFullName"
+					class="avatar-image"
+					@error="avatarError = $event"
+				/>
+				<v-icon v-else name="account_circle" />
+			</v-avatar>
+		</router-link>
 	</div>
 </template>
 
@@ -156,7 +154,6 @@ const userFullName = userStore.fullName ?? undefined;
 		--v-button-background-color: var(--theme--navigation--modules--background);
 		--v-button-background-color-hover: var(--theme--navigation--modules--background);
 
-		position: absolute;
 		top: 0;
 		left: 0;
 		z-index: 2;
