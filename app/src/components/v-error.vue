@@ -12,17 +12,12 @@ const props = defineProps<Props>();
 
 const { t } = useI18n();
 
-const code = computed(() => {
-	return props.error?.response?.data?.errors?.[0]?.extensions?.code || props.error?.extensions?.code || 'UNKNOWN';
-});
-
 const message = computed(() => {
 	let message = props.error?.response?.data?.errors?.[0]?.message || props.error?.message;
 
 	if (message.length > 200) {
 		message = message.substring(0, 197) + '...';
 	}
-
 	return message;
 });
 
@@ -44,7 +39,7 @@ async function copyError() {
 
 <template>
 	<div class="v-error selectable">
-		<output>[{{ code }}] {{ message }}</output>
+		<output>{{ message }}</output>
 		<v-icon
 			v-if="isCopySupported"
 			v-tooltip="t('copy_details')"
