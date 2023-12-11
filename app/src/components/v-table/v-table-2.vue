@@ -5,7 +5,7 @@ import type { ShowSelect } from '@directus/extensions';
 import { clone, forEach, pick } from 'lodash';
 import { computed, ref, useSlots } from 'vue';
 import Draggable from 'vuedraggable';
-import TableHeader from './table-header.vue';
+import TableHeader2 from './table-header-2.vue';
 import TableRow2 from './table-row-2.vue';
 import { Header, HeaderRaw, Item, ItemSelectEvent, Sort } from './types';
 
@@ -254,7 +254,7 @@ function updateSort(newSort: Sort) {
 <template>
 	<div class="v-table" :class="{ loading, inline, disabled }">
 		<table :summary="internalHeaders.map((header) => header.text).join(', ')">
-			<table-header
+			<table-header2
 				v-model:headers="internalHeaders"
 				v-model:reordering="reordering"
 				:sort="internalSort"
@@ -282,7 +282,7 @@ function updateSort(newSort: Sort) {
 				<template v-if="hasHeaderContextMenuSlot" #header-context-menu="{ header }">
 					<slot name="header-context-menu" v-bind="{ header }" />
 				</template>
-			</table-header>
+			</table-header2>
 			<thead v-if="loading" class="loading-indicator" :class="{ sticky: fixedHeader }">
 				<th scope="colgroup" :style="{ gridColumn: fullColSpan }">
 					<v-progress-linear v-if="loading" indeterminate />
