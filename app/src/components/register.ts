@@ -1,6 +1,7 @@
 import ExportSidebarDetail from '@/views/private/components/export-sidebar-detail.vue';
 import RenderDisplay from '@/views/private/components/render-display.vue';
 import RenderTemplate from '@/views/private/components/render-template.vue';
+import RenderTemplate2 from '@/views/private/components/render-template-2.vue';
 import SidebarDetail from '@/views/private/components/sidebar-detail.vue';
 import UserPopover from '@/views/private/components/user-popover.vue';
 import ValueNull from '@/views/private/components/value-null.vue';
@@ -61,12 +62,14 @@ import VSheet from './v-sheet.vue';
 import VSkeletonLoader from './v-skeleton-loader.vue';
 import VSlider from './v-slider.vue';
 import VTable from './v-table/v-table.vue';
+import VTable2 from './v-table/v-table-2.vue';
 import VTabs from './v-tabs.vue';
 import VTab from './v-tab.vue';
 import VTabItem from './v-tab-item.vue';
 import VTabsItems from './v-tabs-items.vue';
 import VTemplateInput from './v-template-input.vue';
 import VTextOverflow from './v-text-overflow.vue';
+import VTextOverflow2 from './v-text-overflow-2.vue';
 import VTextarea from './v-textarea.vue';
 import VUpload from './v-upload.vue';
 import VDatePicker from './v-date-picker.vue';
@@ -127,11 +130,13 @@ export function registerComponents(app: App): void {
 	app.component('VTabItem', VTabItem);
 	app.component('VTab', VTab);
 	app.component('VTable', VTable);
+	app.component('VTable2', VTable2);
 	app.component('VTabsItems', VTabsItems);
 	app.component('VTabs', VTabs);
 	app.component('VTemplateInput', VTemplateInput);
 	app.component('VTextarea', VTextarea);
 	app.component('VTextOverflow', VTextOverflow);
+	app.component('VTextOverflow2', VTextOverflow2);
 	app.component('VUpload', VUpload);
 	app.component('VDatePicker', VDatePicker);
 	app.component('VEmojiPicker', VEmojiPicker);
@@ -145,6 +150,7 @@ export function registerComponents(app: App): void {
 
 	app.component('RenderDisplay', RenderDisplay);
 	app.component('RenderTemplate', RenderTemplate);
+	app.component('RenderTemplate2', RenderTemplate2);
 	app.component('ExportSidebarDetail', ExportSidebarDetail);
 	app.component('SidebarDetail', SidebarDetail);
 	app.component('UserPopover', UserPopover);

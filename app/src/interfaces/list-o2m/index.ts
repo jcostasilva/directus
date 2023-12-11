@@ -91,12 +91,16 @@ export default defineInterface({
 								text: '$t:table',
 								value: 'table',
 							},
+							{
+								text: '$t:table2',
+								value: 'table2',
+							},
 						],
 					},
 					width: 'half',
 				},
 			},
-			...(options.layout === 'table' ? tableOptions : listOptions),
+			...(options.layout === 'table' || options.layout === 'table2' ? tableOptions : listOptions),
 			{
 				field: 'enableCreate',
 				name: '$t:creating_items',

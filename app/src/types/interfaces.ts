@@ -2,4 +2,5 @@
 export enum LAYOUTS {
 	LIST = 'list',
 	TABLE = 'table',
+	TABLE2 = 'table2',
 }

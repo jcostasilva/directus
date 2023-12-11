@@ -84,6 +84,8 @@ const fields = computed(() => {
 
 	if (props.layout === LAYOUTS.TABLE) {
 		displayFields = adjustFieldsForDisplays(props.fields, relationInfo.value.relatedCollection.collection);
+	} else if (props.layout === LAYOUTS.TABLE2) {
+		displayFields = adjustFieldsForDisplays(props.fields, relationInfo.value.relatedCollection.collection);
 	} else {
 		displayFields = adjustFieldsForDisplays(
 			getFieldsFromTemplate(templateWithDefaults.value),
@@ -382,7 +384,7 @@ function getLinkForItem(item: DisplayItem) {
 	</v-notice>
 	<div v-else class="one-to-many">
 		<div :class="{ bordered: layout === LAYOUTS.TABLE }">
-			<div v-if="layout === LAYOUTS.TABLE" class="actions" :class="width">
+			<div v-if="layout === LAYOUTS.TABLE || layout === LAYOUTS.TABLE2" class="actions" :class="width">
 				<div class="spacer" />
 
 				<div v-if="totalItemCount" class="item-count">
@@ -463,6 +465,51 @@ function getLinkForItem(item: DisplayItem) {
 				</template>
 			</v-table>
 
+			<v-table2
+				v-else-if="layout === LAYOUTS.TABLE2"
+				v-model:sort="sort"
+				v-model:headers="headers"
+				:class="{ 'no-last-border': totalItemCount <= 10, ['collection-' + collection]: true }"
+				class=""
+				:loading="loading"
+				:show-manual-sort="allowDrag"
+				:manual-sort-key="relationInfo?.sortField"
+				:items="displayItems"
+				:row-height="tableRowHeight"
+				show-resize
+				@click:row="editRow"
+				@update:items="sortItems"
+			>
+				<template v-for="header in headers" :key="header.value" #[`item.${header.value}`]="{ item }">
+					<render-template2
+						:title="header.value"
+						:collection="relationInfo.relatedCollection.collection"
+						:item="item"
+						:template="`{{${header.value}}}`"
+					/>
+				</template>
+
+				<template #item-append="{ item }">
+					<router-link
+						v-if="enableLink"
+						v-tooltip="t('navigate_to_item')"
+						:to="getLinkForItem(item)!"
+						class="item-link"
+						:class="{ disabled: item.$type === 'created' }"
+					>
+						<v-icon name="launch" />
+					</router-link>
+
+					<v-icon
+						v-if="!disabled && (deleteAllowed || isLocalItem(item))"
+						v-tooltip="t(getDeselectTooltip(item))"
+						class="deselect"
+						:name="getDeselectIcon(item)"
+						@click.stop="deleteItem(item)"
+					/>
+				</template>
+			</v-table2>
+
 			<template v-else-if="loading">
 				<v-skeleton-loader
 					v-for="n in clamp(totalItemCount - (page - 1) * limit, 1, limit)"
@@ -525,6 +572,18 @@ function getLinkForItem(item: DisplayItem) {
 
 			<div class="actions" :class="layout">
 				<template v-if="layout === LAYOUTS.TABLE">
+					<template v-if="pageCount > 1">
+						<v-pagination v-model="page" :length="pageCount" :total-visible="width.includes('half') ? 3 : 5" />
+
+						<div class="spacer" />
+
+						<div v-if="loading === false" class="per-page">
+							<span>{{ t('per_page') }}</span>
+							<v-select v-model="limit" :items="['10', '20', '30', '50', '100']" inline />
+						</div>
+					</template>
+				</template>
+				<template v-else-if="layout === LAYOUTS.TABLE2">
 					<template v-if="pageCount > 1">
 						<v-pagination v-model="page" :length="pageCount" :total-visible="width.includes('half') ? 3 : 5" />
 
