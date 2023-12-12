@@ -49,11 +49,7 @@ const logoURL = computed<string | null>(() => {
 	<div class="public-view">
 		<div class="container" :class="{ wide }">
 			<div class="title-box">
-				<div
-					v-if="info?.project?.project_logo"
-					class="logo"
-					:style="info?.project.project_color ? { backgroundColor: info.project.project_color } : {}"
-				>
+				<div v-if="info?.project?.project_logo" class="logo">
 					<v-image :src="logoURL" :alt="info?.project.project_name || 'Logo'" />
 				</div>
 				<div
@@ -425,6 +421,10 @@ const logoURL = computed<string | null>(() => {
 	position: absolute;
 	transform: scale(0.95);
 	opacity: 0;
+}
+
+#directus > div > div.container > div.title-box > div.logo {
+	background-color: transparent;
 }
 </style>
 @/utils/get-appearance
