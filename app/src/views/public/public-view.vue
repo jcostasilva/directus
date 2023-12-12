@@ -337,6 +337,7 @@ const logoURL = computed<string | null>(() => {
 		.foreground {
 			width: 80%;
 			max-width: 400px;
+			padding: 30px;
 		}
 
 		.note-container {
