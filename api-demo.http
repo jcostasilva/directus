@@ -1,0 +1,8 @@
+// Get all tickets
+GET http://localhost:8055/items/ticket
+Authorization: Bearer ubMd_1L_Zx5ZQyiQeXlCqoZnN_Mo0NWE
+
+###
+// Get all tickets from client
+GET http://localhost:8055/items/ticket?filter[client_id][_eq]=8e10d924-bb5c-49f5-8a01-db10828d5cfc
+Authorization: Bearer ubMd_1L_Zx5ZQyiQeXlCqoZnN_Mo0NWE
