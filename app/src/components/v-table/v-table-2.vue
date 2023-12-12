@@ -393,7 +393,7 @@ table :deep(.loading-indicator) {
 .collection-ticket table :deep(tr),
 .collection-ticket table :deep(.loading-indicator) {
 	display: grid;
-	grid-template-columns: 160px 1fr 90px 60px min-content;
+	grid-template-columns: 160px 1fr 120px 60px min-content;
 }
 
 table :deep(td.align-left),
