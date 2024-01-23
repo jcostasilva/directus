@@ -44,6 +44,8 @@ const props = withDefaults(
 	},
 );
 
+const role = useUserStore().currentUser?.role?.id;
+
 const emit = defineEmits(['update:splitView']);
 
 const { t } = useI18n();
@@ -259,7 +261,7 @@ function getWidth(input: unknown, fallback: number): number {
 		</template>
 	</v-info>
 
-	<div v-else class="private-view" :class="{ appearance, 'full-screen': fullScreen, splitView }">
+	<div v-else class="private-view" :class="{ appearance, 'full-screen': fullScreen, splitView }" :data-role="role">
 		<aside
 			id="navigation"
 			role="navigation"
